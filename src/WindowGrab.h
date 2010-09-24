@@ -39,7 +39,6 @@ HBITMAP wgCapture(HBITMAP bmpA)
 	RECT desktopRect,visibleRect,appRect;
 	int Width, Height;
 	HDC hdcFrom,hdcTo;
-	HBITMAP hBitmap;
 	HBITMAP hLocalBitmap;
 	int x=0,y=0;
 	int res;
@@ -80,8 +79,8 @@ HBITMAP wgCapture(HBITMAP bmpA)
 	hLocalBitmap = SelectObject(hdcTo, bmpA);
 	StretchBlt(hdcTo, 21,39, 214,357, hdcFrom, 0,0, Width,Height, SRCCOPY);
 	
-    DeleteDC(hdcTo);
-
+	ReleaseDC(hWnd, hdcFrom);
+	DeleteDC(hdcTo);
 
 	return TRUE;
 }

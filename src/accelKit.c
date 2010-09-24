@@ -134,7 +134,7 @@ void LoadGLTexture(HBITMAP bitmap) // Load Bitmaps And Convert To Textures
 	}
  }
 
-  glGenTextures(1, &texture[0]); // Create The Texture
+  //glGenTextures(1, &texture[0]); // Create The Texture
   // Build Texture
   {
   // Typical Texture Generation Using Data From The Bitmap
@@ -244,15 +244,12 @@ static void DrawWP7(void)
      glTexCoord2f(0.0f,1.0f); glVertex3f(-1.6f, 2.43f, 0.0f);
      glTexCoord2f(1.0f,1.0f); glVertex3f( 1.6f, 2.43f, 0.0f);
      glTexCoord2f(1.0f,0.0f); glVertex3f( 1.6f,-2.90f, 0.0f);
-     glTexCoord2f(0.0f,0.0f); glVertex3f(-1.6f,-2.90f, 0.0f); 
-	 
-	  
+     glTexCoord2f(0.0f,0.0f); glVertex3f(-1.6f,-2.90f, 0.0f);
      glEnd();
 
 
 	glPopMatrix();	// Restore world coordinate system.
 
-	
 }
 
 BOOL is_po2(int a)
@@ -634,6 +631,7 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(Keyboard);
 	
 	bmpA = LoadBmp();
+	glGenTextures(1, &texture[0]); // Create The Texture
     LoadGLTexture(bmpA);
 	
 	
@@ -644,7 +642,7 @@ int main(int argc, char** argv)
 
 	glutMainLoop();
 
-
+	glDeleteTextures( 1, &texture[0] );
 	DeleteObject(bmpA);
 
 	return (0);
