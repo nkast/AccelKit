@@ -411,7 +411,7 @@ static void Keyboard(unsigned char key, int x, int y)
 		case 'O':
 		case 'o':
 			webcamMode = (webcamMode+1)%2;
-			fprintf(stderr, "Webcam mode: %f (frame/sec)\n", (webcamMode==WCM_VERTICAL)?"Vertical":"Horizontal");
+			fprintf(stderr, "Webcam mode: %s \n", (webcamMode==WCM_VERTICAL)?"Vertical":"Horizontal");
 			break;
 		case '?':
 		case '/':
@@ -544,7 +544,7 @@ static void Display(void)
 		//none
 	
 
-		switch(webcamMode==WCM_VERTICAL)
+		switch(webcamMode)
 		{
 		case WCM_VERTICAL:
 			wsoutx = gPatt_trans[1][0];
@@ -552,12 +552,12 @@ static void Display(void)
 			wsoutz = gPatt_trans[1][2];
 			break;
 		case WCM_HORIZONTAL:
-			
+			wsoutx = -gPatt_trans[2][0];
+			wsouty = gPatt_trans[2][1];
+			wsoutz = gPatt_trans[2][2];
 			break;
-
-
 		}
-		
+	
 
 		// ARToolKit supplied distance in millimetres, but I want OpenGL to work in my units.
 		arglCameraViewRH(gPatt_trans, m, VIEW_SCALEFACTOR);
