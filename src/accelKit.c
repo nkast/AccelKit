@@ -44,7 +44,7 @@
 //	Constants
 // ============================================================================
 
-#define VIEW_SCALEFACTOR		0.025		// 1.0 ARToolKit unit becomes 0.025 of my OpenGL units.
+#define VIEW_SCALEFACTOR		0.050		// 1.0 ARToolKit unit becomes 0.050 of my OpenGL units.
 #define VIEW_DISTANCE_MIN		0.1			// Objects closer to the camera than this will not be displayed.
 #define VIEW_DISTANCE_MAX		100.0		// Objects further away from the camera than this will not be displayed.
 
@@ -72,7 +72,7 @@ static int			gARTThreshhold = 100;
 static long			gCallCountMarkerDetect = 0;
 
 // Transformation matrix retrieval.
-static double		gPatt_width     = 80.0;	// Per-marker, but we are using only 1 marker.
+static double		gPatt_width     = 40.0;	// Per-marker, but we are using only 1 marker.
 static double		gPatt_centre[2] = {0.0, 0.0}; // Per-marker, but we are using only 1 marker.
 static double		gPatt_trans[3][4];		// Per-marker, but we are using only 1 marker.
 static int			gPatt_found = FALSE;	// Per-marker, but we are using only 1 marker.
