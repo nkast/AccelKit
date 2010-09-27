@@ -48,6 +48,11 @@
 #define VIEW_DISTANCE_MIN		0.1			// Objects closer to the camera than this will not be displayed.
 #define VIEW_DISTANCE_MAX		100.0		// Objects further away from the camera than this will not be displayed.
 
+
+//WEBCAMMODE  
+#define WCM_VERTICAL 0
+#define WCM_HORIZONTAL 1
+
 // ============================================================================
 //	Global variables
 // ============================================================================
@@ -82,6 +87,9 @@ static ARGL_CONTEXT_SETTINGS_REF gArglSettings = NULL;
 HBITMAP bmpA = 0;
 HBITMAP bmpB = 0;
 GLuint texture[2]; //define 2 textures
+
+
+int webcamMode = WCM_VERTICAL;
 
 
 // ============================================================================
@@ -352,6 +360,10 @@ static void debugReportMode(void)
 	} else {
 		fprintf(stderr, "MatchingPCAMode (P)   : With PCA\n");
 	}
+
+	fprintf(stderr, "\n");
+	
+	
 }
 
 static void Quit(void)
@@ -395,6 +407,11 @@ static void Keyboard(unsigned char key, int x, int y)
 		case 'D':
 		case 'd':
 			arDebug = !arDebug;
+			break;
+		case 'O':
+		case 'o':
+			webcamMode = (webcamMode+1)%2;
+			fprintf(stderr, "Webcam mode: %f (frame/sec)\n", (webcamMode==WCM_VERTICAL)?"Vertical":"Horizontal");
 			break;
 		case '?':
 		case '/':
@@ -526,9 +543,21 @@ static void Display(void)
 		// (I.e. must be specified before viewing transformations.)
 		//none
 	
-		wsoutx = gPatt_trans[1][0];
-		wsouty = gPatt_trans[1][1];
-		wsoutz = gPatt_trans[1][2];
+
+		switch(webcamMode==WCM_VERTICAL)
+		{
+		case WCM_VERTICAL:
+			wsoutx = gPatt_trans[1][0];
+			wsouty = gPatt_trans[1][1];
+			wsoutz = gPatt_trans[1][2];
+			break;
+		case WCM_HORIZONTAL:
+			
+			break;
+
+
+		}
+		
 
 		// ARToolKit supplied distance in millimetres, but I want OpenGL to work in my units.
 		arglCameraViewRH(gPatt_trans, m, VIEW_SCALEFACTOR);
