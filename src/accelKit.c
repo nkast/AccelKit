@@ -96,10 +96,13 @@ int webcamMode = WCM_VERTICAL;
 //	Functions
 // ============================================================================
 
+#define WPBMP_W 256 
+#define WPBMP_H 479
+
 void LoadGLTexture(HBITMAP bitmap) // Load Bitmaps And Convert To Textures
 {
  // store bitmap data in a vector
- unsigned char data[256*479*3];
+ unsigned char data[WPBMP_W*WPBMP_H*3];
  unsigned char buff;
  int i;
  HDC hDC;
@@ -110,8 +113,8 @@ void LoadGLTexture(HBITMAP bitmap) // Load Bitmaps And Convert To Textures
  BITMAPINFO info;
  BITMAPINFOHEADER header;
  header.biSize = sizeof(BITMAPINFOHEADER);
- header.biWidth = 256; 
- header.biHeight = 479; 
+ header.biWidth = WPBMP_W; 
+ header.biHeight = WPBMP_H; 
  header.biPlanes = 1; 
  header.biBitCount = 24;
  header.biCompression = BI_RGB;
@@ -127,12 +130,12 @@ void LoadGLTexture(HBITMAP bitmap) // Load Bitmaps And Convert To Textures
 
  // store bitmap data in a vector
  hDC = GetDC(hWnd);
- res = GetDIBits(hDC, bitmap, 0, 479, &data, &info, DIB_RGB_COLORS);
+ res = GetDIBits(hDC, bitmap, 0, WPBMP_H, &data, &info, DIB_RGB_COLORS);
  res = ReleaseDC(hWnd,hDC);
 
 
  // convert from BGR to RGB
- for(i=0; i<256*479; i++)
+ for(i=0; i<WPBMP_W*WPBMP_H; i++)
  {
 	buff = data[i*3];
 	if(i>=3)
@@ -148,7 +151,7 @@ void LoadGLTexture(HBITMAP bitmap) // Load Bitmaps And Convert To Textures
   // Typical Texture Generation Using Data From The Bitmap
    glBindTexture(GL_TEXTURE_2D, texture[0]);
    // Generate The Texture 
-   glTexImage2D(GL_TEXTURE_2D, 0, 3, 256, 479, 0, GL_RGB, GL_UNSIGNED_BYTE, &data);
+   glTexImage2D(GL_TEXTURE_2D, 0, 3, WPBMP_W, WPBMP_H, 0, GL_RGB, GL_UNSIGNED_BYTE, &data);
    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP);
