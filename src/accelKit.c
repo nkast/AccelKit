@@ -249,10 +249,10 @@ static void DrawWP7(void)
 
 	// Draw the top face
      glBegin(GL_QUADS);
-     glTexCoord2f(0.0f,1.0f); glVertex3f(-1.6f, 2.43f, 0.0f);
-     glTexCoord2f(1.0f,1.0f); glVertex3f( 1.6f, 2.43f, 0.0f);
-     glTexCoord2f(1.0f,0.0f); glVertex3f( 1.6f,-2.90f, 0.0f);
-     glTexCoord2f(0.0f,0.0f); glVertex3f(-1.6f,-2.90f, 0.0f);
+     glTexCoord2f(0.0f,1.0f); glVertex3f(-1.5f, 2.43f, 0.0f);
+     glTexCoord2f(1.0f,1.0f); glVertex3f( 1.5f, 2.43f, 0.0f);
+     glTexCoord2f(1.0f,0.0f); glVertex3f( 1.5f,-2.90f, 0.0f);
+     glTexCoord2f(0.0f,0.0f); glVertex3f(-1.5f,-2.90f, 0.0f);
      glEnd();
 
 
@@ -640,7 +640,7 @@ int main(int argc, char** argv)
 		glutEnterGameMode();
 	} else {
 		glutInitWindowSize(prefWidth, prefHeight);
-		glutCreateWindow(argv[0]);
+		glutCreateWindow("accelKit");
 	}
 
 	// Setup argl library for current context.
