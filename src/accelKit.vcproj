@@ -26,7 +26,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="xcopy $(ProjectDir)\Data\*.* $(TargetDir)Data /e /c /i [/f] [/r] /y"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
